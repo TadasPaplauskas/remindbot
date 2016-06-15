@@ -1,0 +1,24 @@
+{
+  "name": "remindbot",
+  "version": "0.1.0",
+  "description": "Facebook messenger bot for reminders",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha tests --reporter spec"
+  },
+  "author": "Tadas Paplauskas (https://paplauskas.lt)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "chai": "^3.5.0",
+    "chrono-node": "^1.2.3",
+    "express": "^4.13.4",
+    "mocha": "^2.5.0",
+    "mongodb": "^2.1.19",
+    "mongoose": "^4.4.19",
+    "pattern-parser": "*",
+    "request": "^2.72.0",
+    "to-iso-string": "0.0.2",
+    "validator": "^5.2.0"
+  }
+}
