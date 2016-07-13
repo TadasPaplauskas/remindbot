@@ -20,7 +20,7 @@ db.once('open', function()
     // components of the system
     var messenger = require('./lib/Messenger')( { mongoose: mongoose, config: config.messenger, request: request });
     var reminders = require('./lib/Reminders')( { mongoose: mongoose, messenger: messenger, chrono: chrono });
-    var app = require('./lib/App')({ messenger: messenger, parser: parser, reminders: reminders });
+    var app = require('./lib/App')({ messenger: messenger, parser: parser, reminders: reminders, chrono: chrono });
 
     // web server
     var server = express();
@@ -33,15 +33,10 @@ db.once('open', function()
     /*** messenger bot entry point ***/
     server.post('/messenger', function (req, res)
     {
+        //console.log(JSON.stringify(req.body));
         app.messengerRequest(req.body);
         res.sendStatus(200);
     });
-
-    server.get('/messenger', function (req, res)
-    {
-        res.sendStatus(200);
-    });
-
 
     server.listen(config.web.port, function ()
     {
