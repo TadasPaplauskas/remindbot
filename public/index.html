@@ -1,1 +1,115 @@
-Hi, remindbot will remind you about stuff.
+<html>
+<head>
+    <title>Remindbot &middot; a messenger reminder bot</title>
+<style>
+    body {
+        font-family: Consolas, Lucida Console, monospace;
+        font-size: 15px;
+        line-height: 1.42857143;
+        color: #333;
+    }
+    .container {
+        margin: 2em auto;
+        width: 90vw;
+        width: 50vw;
+
+    }
+    .footer {
+        clear: left;
+        padding-top: 5em;
+    }
+    a{
+        color: #0033CC;
+        text-decoration: none;
+    }
+
+    a:visited{
+        color: #0033CC;
+        text-decoration: none;
+    }
+
+    p {
+        max-width: 50em;
+        text-align: justify;
+    }
+
+    .chat-sample-image {
+        width: 100%;
+        max-width: 1080px;
+    }
+
+    /* mobile first, but expand if the screen is bigger */
+    @media (min-width: 1080px) {
+        .container {
+            width: 50vw;
+        }
+        .column {
+            float: left;
+            width: 50%;
+        }
+        .chat-sample-image {
+            width: initial;
+            max-height: 50vh;
+            min-height: 400px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Remindbot</h1>
+        <p>Hi, remindbot will remind you about stuff.</p>
+        <div class="fb-send-to-messenger"
+          messenger_app_id="1634956160159351"
+          page_id="1585637765064081"
+          data-ref="homepage"
+          color="blue"
+          size="xlarge">
+        </div>
+    </div>
+
+    <div class="content">
+      <div class="column">
+          <p>
+            <img src="http://swapmyapp.com/wp-content/uploads/2014/06/FB_20140612_HH1241.jpg" class="chat-sample-image">
+          </p>
+        </div>
+        <div class="column">
+          <p>
+            <strong>What is this?</strong><br>
+            It's a simple messenger bot that does one think and it does it very well: it reminds you about stuff.
+          </p>
+          <p>
+            <strong>What's wrong with calendar?</strong><br>
+            Nothing. I still use google calendar and trello boards to get work done. However, don't you just wish that you could ask someone to remind you to buy some milk, take out the trash or call your mom? This bot is designed exactly for that - setting reminders for small tasks on the go.
+          </p>
+      </div>
+    </div>
+
+    <div class="footer">
+        2016 made by <a href="https://paplauskas.lt/">Tadas Paplauskas</a>.
+    </div>
+</div>
+
+<!-- send to messenger plug-in -->
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "APP_ID",
+        xfbml: true,
+        version: "v2.6"
+      });
+
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) { return; }
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>
