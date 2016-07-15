@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 var parser = require('pattern-parser');
 var chrono = require('chrono-node');
 
-
 mongoose.connect(config.mongodb.url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongodb error:'));
@@ -18,9 +17,28 @@ db.once('open', function()
     console.log('mongodb connected');
 
     // components of the system
-    var messenger = require('./lib/Messenger')( { mongoose: mongoose, config: config.messenger, request: request });
-    var reminders = require('./lib/Reminders')( { mongoose: mongoose, messenger: messenger, chrono: chrono });
-    var app = require('./lib/App')({ messenger: messenger, parser: parser, reminders: reminders, chrono: chrono });
+    var messenger = require('./lib/Messenger');
+    var reminders = require('./lib/Reminders');
+    var app = require('./lib/App');
+
+    // inject dependencies
+    messenger.init({
+        mongoose: mongoose,
+        config: config.messenger,
+        request: request,
+        parser: parser
+    });
+    reminders.init({
+        mongoose: mongoose,
+        messenger: messenger,
+        chrono: chrono
+    });
+    app.init({
+        messenger: messenger,
+        parser: parser,
+        reminders: reminders,
+        chrono: chrono
+    });
 
     // web server
     var server = express();
@@ -29,11 +47,10 @@ db.once('open', function()
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(express.static('public'));
 
-
     /*** messenger bot entry point ***/
     server.post('/messenger', function (req, res)
     {
-        //console.log(JSON.stringify(req.body));
+        console.log(JSON.stringify(req.body));
         app.messengerRequest(req.body);
         res.sendStatus(200);
     });
