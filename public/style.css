@@ -1,0 +1,51 @@
+body {
+        font-family: Consolas, Lucida Console, monospace;
+        font-size: 15px;
+        line-height: 1.42857143;
+        color: #333;
+    }
+    .container {
+        margin: 2em auto;
+        width: 90vw;
+        width: 50vw;
+
+    }
+    .footer {
+        clear: left;
+        padding-top: 5em;
+    }
+    a{
+        color: #0033CC;
+        text-decoration: none;
+    }
+
+    a:visited{
+        color: #0033CC;
+        text-decoration: none;
+    }
+
+    p {
+        max-width: 50em;
+        text-align: justify;
+    }
+
+    .chat-sample-image {
+        width: 100%;
+        max-width: 1080px;
+    }
+
+    /* mobile first, but expand if the screen is bigger */
+    @media (min-width: 1080px) {
+        .container {
+            width: 50vw;
+        }
+        .column {
+            float: left;
+            width: 50%;
+        }
+        .chat-sample-image {
+            width: initial;
+            max-height: 50vh;
+            min-height: 400px;
+        }
+    }
