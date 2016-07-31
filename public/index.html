@@ -6,24 +6,35 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>Remindbot</h1>
+        <h1><img class="icon" src="icon.png"> Remindbot</h1>
         <p>Hi, remindbot will remind you about stuff.</p>
-        <div class="fb-send-to-messenger"
+
+
+      <div class="row">
+        <div class="col fb-send-to-messenger messenger-button"
           messenger_app_id="1634956160159351"
           page_id="1585637765064081"
           data-ref="homepage"
           color="blue"
           size="xlarge">
         </div>
+        <div class="col fb-messengermessageus messenger-button"
+          messenger_app_id="1634956160159351"
+          page_id="1585637765064081"
+          color="blue"
+          size="xlarge">
+        </div>
     </div>
+  </div>
 
     <div class="content">
-      <div class="column">
+      <div class="row">
+        <div class="col">
           <p>
-            <img src="http://swapmyapp.com/wp-content/uploads/2014/06/FB_20140612_HH1241.jpg" class="chat-sample-image">
+            <img src="screenshot.png" class="chat-sample-image">
           </p>
         </div>
-        <div class="column">
+        <div class="col">
           <p>
             <strong>What is this?</strong><br>
             It's a simple messenger bot that does one think and it does it very well: it reminds you about stuff.
@@ -32,11 +43,14 @@
             <strong>What's wrong with regular calendar apps?</strong><br>
             Nothing. I still use google calendar and trello boards to get work done. However, don't you sometimes just wish that you could ask someone to remind you to buy some milk, take out the trash or call your mom? This bot is designed exactly for that - setting reminders for small tasks on the go.
           </p>
+        </div>
       </div>
     </div>
 
     <div class="footer">
-        2016 made by <a href="https://paplauskas.lt/">Tadas Paplauskas</a>. <a href="privacy.html">Privacy policy</a>.
+        2016 made by <a href="https://paplauskas.lt/">Tadas Paplauskas</a>. The icon by <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a>.
+        <br>
+        <a href="privacy.html">Privacy policy</a>.
     </div>
 </div>
 
@@ -44,7 +58,7 @@
 <script>
     window.fbAsyncInit = function() {
       FB.init({
-        appId: "APP_ID",
+        appId: "1634956160159351",
         xfbml: true,
         version: "v2.6"
       });
@@ -59,6 +73,30 @@
        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<!-- message us plugin -->
+  <script>
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "1634956160159351",
+        xfbml: true,
+        version: "v2.6"
+      });
+
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) { return; }
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+
+<!-- GA script -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

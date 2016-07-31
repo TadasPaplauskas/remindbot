@@ -1,19 +1,25 @@
 body {
         font-family: Consolas, Lucida Console, monospace;
         font-size: 15px;
-        line-height: 1.42857143;
-        color: #333;
+        line-height: 1.5;
+        color: #555;
     }
-    .container {
-        margin: 2em auto;
-        width: 90vw;
-        width: 50vw;
 
+    .header .icon {
+        height: 1em;
     }
+
+    .container {
+        margin: 1em auto;
+        max-width: 50em;
+        padding: 1em;
+    }
+
     .footer {
         clear: left;
-        padding-top: 5em;
+        padding-top: 2em;
     }
+
     a{
         color: #0033CC;
         text-decoration: none;
@@ -24,9 +30,14 @@ body {
         text-decoration: none;
     }
 
-    p {
-        max-width: 50em;
+    p{
         text-align: justify;
+    }
+
+    strong {
+        color: #333;
+        font-weight: bold;
+        font-style: italic;
     }
 
     .chat-sample-image {
@@ -34,18 +45,36 @@ body {
         max-width: 1080px;
     }
 
+    .col {
+        width: 100%;
+    }
+
     /* mobile first, but expand if the screen is bigger */
-    @media (min-width: 1080px) {
+    @media screen
+        and (min-width: 1024px)
+        and (orientation: landscape) {
         .container {
             width: 50vw;
         }
-        .column {
+
+        .row {
+            display: inline-block;
+        }
+
+        .col {
             float: left;
             width: 50%;
         }
-        .chat-sample-image {
-            width: initial;
-            max-height: 50vh;
-            min-height: 400px;
+
+        .col p {
+            padding: 1em;
+        }
+    }
+
+    @media screen
+        and (max-width: 1024px)
+        and (orientation: portrait) {
+        body {
+            font-size: 25px;
         }
     }
