@@ -1,5 +1,5 @@
 body {
-        font-family: Consolas, Lucida Console, monospace;
+        font-family: "Roboto Slab", Helvetica, sans-serif;
         font-size: 15px;
         line-height: 1.5;
         color: #555;
@@ -17,20 +17,20 @@ body {
 
     .footer {
         clear: left;
-        padding-top: 2em;
+        padding-top: 3em;
     }
 
-    a{
+    a {
         color: #0033CC;
         text-decoration: none;
     }
 
-    a:visited{
+    a:visited {
         color: #0033CC;
         text-decoration: none;
     }
 
-    p{
+    p {
         text-align: justify;
     }
 
@@ -49,16 +49,35 @@ body {
         width: 100%;
     }
 
+    .button {
+        padding: 0.75em;
+        cursor: pointer;
+        color: #fff;
+        background: #0084ff;
+        border: 0 none;
+        border-radius: 0.3em;
+        text-align:center;
+        font-weight: normal;
+        font-size: 120%;
+        white-space: nowrap;
+    }
+
+    .button a, .button a:visited {
+        color: #fff;
+    }
+
+    .messenger-button {
+        margin: 2em 0 0 0;
+    }
+
     /* mobile first, but expand if the screen is bigger */
     @media screen
         and (min-width: 1024px)
         and (orientation: landscape) {
-        .container {
-            width: 50vw;
-        }
 
         .row {
             display: inline-block;
+            width: 100%;
         }
 
         .col {
@@ -68,13 +87,5 @@ body {
 
         .col p {
             padding: 1em;
-        }
-    }
-
-    @media screen
-        and (max-width: 1024px)
-        and (orientation: portrait) {
-        body {
-            font-size: 25px;
         }
     }

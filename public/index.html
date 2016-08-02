@@ -1,30 +1,28 @@
 <html>
 <head>
-    <title>Remindbot &middot; a messenger reminder bot</title>
-  <link href="style.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Your friend with a perfect memory.">
+    <title>RemindBot &middot; a messenger reminder bot</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1><img class="icon" src="icon.png"> Remindbot</h1>
-        <p>Hi, remindbot will remind you about stuff.</p>
+        <h1><img class="icon" src="icon.png"> RemindBot</h1>
+        <p>Your friend with a perfect memory.</p>
 
-
-      <div class="row">
-        <div class="col fb-send-to-messenger messenger-button"
+        <div class="messenger-button">
+          <span class="button"><a href="https://m.me/remindbot">Chat with RemindBot</a></span>
+        </div>
+        <div class="fb-send-to-messenger messenger-button"
           messenger_app_id="1634956160159351"
           page_id="1585637765064081"
           data-ref="homepage"
           color="blue"
           size="xlarge">
         </div>
-        <div class="col fb-messengermessageus messenger-button"
-          messenger_app_id="1634956160159351"
-          page_id="1585637765064081"
-          color="blue"
-          size="xlarge">
-        </div>
-    </div>
   </div>
 
     <div class="content">
@@ -37,18 +35,22 @@
         <div class="col">
           <p>
             <strong>What is this?</strong><br>
-            It's a simple messenger bot that does one think and it does it very well: it reminds you about stuff.
+            It's a Messenger chatbot that does one think and does it well: it reminds you to do things.
           </p>
           <p>
-            <strong>What's wrong with regular calendar apps?</strong><br>
-            Nothing. I still use google calendar and trello boards to get work done. However, don't you sometimes just wish that you could ask someone to remind you to buy some milk, take out the trash or call your mom? This bot is designed exactly for that - setting reminders for small tasks on the go.
+            <strong>What's wrong with calendar apps?</strong><br>
+            Nothing. I still use Google Calendar and Trello to get work done. However, some tasks like "buy milk" or "call your mom" feel too small for those tools. RemindBot is your friend with a perfect memory - you can set reminders using natural language and get them every time.
+          </p>
+          <p>
+            <strong>I already use Siri/Google Now for that kind of thing.</strong><br>
+            Whatever works for you, but many people do not enjoy talking to their smartphones.
           </p>
         </div>
       </div>
     </div>
 
     <div class="footer">
-        2016 made by <a href="https://paplauskas.lt/">Tadas Paplauskas</a>. The icon by <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a>.
+        2016 made by <a href="https://paplauskas.lt/">Tadas Paplauskas</a>. Icon by <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a>.
         <br>
         <a href="privacy.html">Privacy policy</a>.
     </div>
@@ -73,28 +75,6 @@
        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
-
-<!-- message us plugin -->
-  <script>
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: "1634956160159351",
-        xfbml: true,
-        version: "v2.6"
-      });
-
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) { return; }
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-  </script>
 
 <!-- GA script -->
 <script>
