@@ -1,5 +1,5 @@
 # RemindBot
-Your friend with a perfect memory.
+[remindbox.xyz](https://remindbot.xyz) - your friend with a perfect memory.
 
 ### What is this?
 It's a Messenger chatbot that does one thing and does it well: it reminds you to do stuff.
