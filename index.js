@@ -36,8 +36,7 @@ db.once('open', function()
     app.init({
         messenger: messenger,
         parser: parser,
-        reminders: reminders,
-        chrono: chrono
+        reminders: reminders
     });
 
     // web server
