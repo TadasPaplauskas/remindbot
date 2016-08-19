@@ -1,164 +1,165 @@
-var assert = require('assert');
+// tests to verify that patterns work as intended
 
-var config = require('../config');
-var express = require('express');
-var bodyParser = require('body-parser');
-var request = require('request');
-var mongoose = require('mongoose');
+// node tests/Test.js
+// dependencies
+var test = require('tape');
 var parser = require('pattern-parser');
+var app = require('../lib/App');
 
-var messenger = require('../lib/Messenger')( { config: config.messenger, request: request });
-var reminders = require('../lib/Reminders')( { mongoose: mongoose, messenger: messenger });
-var app = require('../lib/App')({ messenger: messenger, parser: parser, reminders: reminders });
-
-before(function()
-{
-    eventSillyMessage = {
-    "entry":[
-        {
-            "messaging":[
-                {
-                    "sender": { "id": 123 },
-                    "message": {
-                        "text": "yabadabadoo"
-                    }
-                }
-            ]
-        }
-    ]
-};
-
-    eventGoodMessage = {
-        "object": "page",
-        "entry":[
-            {
-                "id": "633277340164753",
-                "time": 1465377041153,
-                "messaging":[
-                    {
-                        "sender": { "id": "875423282569413" },
-                        "message": {
-                            "mid": "mid.1465377041123:e618d3c5c8ec2b0e49",
-                            "seq": 55,
-                            "text": "Remind me to take out the trash tomorrow morning"
-                        }
-                    }
-                ]
-            }
-        ]
-    };
+// prepare a mock.
+// All the same functions as in original object, but they return function name
+var reminders = {};
+Object.keys(require('../lib/Reminders')).forEach((key) => {
+    reminders[key] = (...args) => { return args; };
 });
 
+// prepare app object
+app.init({
+        messenger: {},
+        parser: parser,
+        reminders: reminders
+    });
 
+// tests
 
-describe('App.messengerRequest', function ()
-{
-    it('Should return true (bad message, not found)', function () {
-        assert.ok(app.messengerRequest(eventSillyMessage));
-    }, 'Does not return true');
+test('Parse "list"', (t) => {
+    let parsed = parser('list',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, ['list'], 'should call reminders.list()');
+    t.end();
 });
 
+test('Parse "cancel"', (t) => {
+    let parsed = parser('cancel',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
 
-describe('App.messengerRequest', function ()
-{
-    it('Should return true (good message)', function () {
-        assert.ok(app.messengerRequest(eventGoodMessage));
-    }, 'Does not return true');
+    // check if parsing was successful
+    t.deepEqual(parsed, ['cancel'], 'should call reminders.cancel()');
+    t.end();
 });
 
+test('Parse "Remind me about something tomorrow morning"', (t) => {
+    let parsed = parser('Remind me about something tomorrow morning',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
 
-describe('Messenger.parseEvents', function ()
-{
-    beforeEach(function()
-    {
-        messages = messenger.parseEvents(eventSillyMessage);
-    });
-
-    it('should return array', function () {
-
-        assert.ok(messages, 'Does not return array');
-    });
-    it('first message should be "yabadabadoo"', function () {
-
-        assert.ok(messages[0].text === 'yabadabadoo', 'Messages were not parsed');
-    });
+    // check if parsing was successful
+    t.deepEqual(parsed, [' me about ', 'something', 'tomorrow', 'morning'],
+        'should call reminders.remindSoonWithSeparator()');
+    t.end();
 });
 
-/*
-    it('parses "Remind me to pay the taxes tomorrow morning"', function () {
-        assert.ok(
-            parse('Remind me to pay the taxes tomorrow morning', [{
-                pattern: 'Remind me to {string} tomorrow {word}',
-                callback: function (str1, str2)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                    assert.equal(str2, 'morning');
-                }
-            }]));
-    });
+test('Parse "Reminder to do something in 1 hour"', (t) => {
+    let parsed = parser('Reminder to do something in 1 hour',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
 
-    it('parses "Remind me to pay the taxes this evening"', function () {
-        assert.ok(
-            parse('Remind me to pay the taxes this evening', [{
-                pattern: 'Remind me to {string} this {word}',
-                callback: function (str1, str2)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                    assert.equal(str2, 'evening');
-                }
-            }]));
-    });
+    // check if parsing was successful
+    t.deepEqual(parsed, ['er to ', 'do something', 'in', '1 hour'],
+        'should call reminders.remindOnDateWithSeparator()');
+    t.end();
+});
 
-    it('parses "Set reminder to pay the taxes tomorrow"', function () {
-        assert.ok(
-            parse('Set reminder to pay the taxes tomorrow', [{
-                pattern: 'Set reminder to {string} tomorrow',
-                callback: function (str1, str2)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                }
-            }]));
-    });
+test('Parse "Reminder to do something in 1 hour"', (t) => {
+    let parsed = parser('Reminder to do something in 1 hour',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
 
-    it('parses "Set reminder to pay the taxes next tuesday"', function () {
-        assert.ok(
-            parse('Set reminder to pay the taxes next tuesday', [{
-                pattern: 'Set reminder to {string} next {day_of_week}$',
-                callback: function (str1, str2)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                    assert.equal(str2, 'tuesday');
-                }
-            }]));
-    });
+    // check if parsing was successful
+    t.deepEqual(parsed, ['er to ', 'do something', 'in', '1 hour'],
+        'should call reminders.remindOnDateWithSeparator()');
+    t.end();
+});
 
-    it('parses "Set reminder to pay the taxes next tuesday morning"', function () {
-        assert.ok(
-            parse('Set reminder to pay the taxes next tuesday morning', [{
-                pattern: 'Set reminder to {string} next {day_of_week} {part_of_day}$',
-                callback: function (str1, str2, str3)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                    assert.equal(str2, 'tuesday');
-                    assert.equal(str3, 'morning');
-                }
-            }]));
-    });
+test('Parse "Reminder to do something in 1 hour"', (t) => {
+    let parsed = parser('Reminder to do something in 1 hour',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
 
-    it('parses "Set reminder to pay the taxes next tuesday 16:00"', function () {
-        assert.ok(
-            parse('Set reminder to pay the taxes next tuesday 16:00', [{
-                pattern: 'Set reminder to {string} next {string}',
-                callback: function (str1, time)
-                {
-                    assert.equal(str1, 'pay the taxes');
-                    assert.equal(time, 'tuesday 16:00');
-                }
-            }]));
-    });*/
+    // check if parsing was successful
+    t.deepEqual(parsed, ['er to ', 'do something', 'in', '1 hour'],
+        'should call reminders.remindOnDateWithSeparator()');
+    t.end();
+});
 
-describe('Reminder.void', function () {
-    it('Should exist', function () {
-        assert.ok(true);
-    });
+test('Parse "Remind me something"', (t) => {
+    let parsed = parser('Remind me something',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, [' me ', 'something'],
+        'should call reminders.remindIncomplete()');
+    t.end();
+});
+
+test('Parse "Remind something next saturday"', (t) => {
+    let parsed = parser('Remind something next saturday',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, [' ', 'something', 'next saturday'],
+        'should call reminders.remindIncomplete()');
+    t.end();
+});
+
+test('Parse "Tomorrow: meet someone at 12:00"', (t) => {
+    let parsed = parser('Tomorrow: meet someone at 12:00',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, ['Tomorrow', ':', 'meet someone', '12:00'],
+        'should call reminders.dateSeparatorReminderTime()');
+    t.end();
+});
+
+test('Parse "Next monday something at 12:00', (t) => {
+    let parsed = parser('Next monday something at 12:00',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, ['Next monday', 'something', '12:00'],
+        'should call reminders.dayReminderTime()');
+    t.end();
+});
+
+test('Parse "Something at 5pm"', (t) => {
+    let parsed = parser('Something at 5pm',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, ['Something', 'at', '5pm'],
+        'should call reminders.remindOnDateWithoutSeparator()');
+    t.end();
+});
+
+test('Parse "Something next friday afternoon"', (t) => {
+    let parsed = parser('Something next friday afternoon',
+        app.getPatterns(), // get current patterns
+        () => { return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed, ['Something', 'next friday', 'afternoon'],
+        'should call reminders.remindSoonWithoutSeparator()');
+    t.end();
 });

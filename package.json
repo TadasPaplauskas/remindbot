@@ -4,19 +4,18 @@
   "description": "Facebook messenger bot for reminders",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests --reporter spec"
+    "test": "node tests/Test.js"
   },
   "author": "Tadas Paplauskas (https://paplauskas.lt)",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.1",
-    "chai": "^3.5.0",
     "chrono-node": "^1.2.3",
     "express": "^4.13.4",
-    "mocha": "^2.5.0",
     "mongodb": "^2.1.19",
     "mongoose": "^4.4.19",
     "pattern-parser": "*",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "tape": "^4.6.0"
   }
 }
