@@ -7,7 +7,7 @@
     "test": "node tests/Test.js"
   },
   "author": "Tadas Paplauskas (https://paplauskas.lt)",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "body-parser": "^1.15.1",
     "chrono-node": "^1.2.3",
