@@ -162,3 +162,17 @@ test('Parse "Something in 1 hour"', (t) => {
         'should call reminders.remindSoonWithoutSeparator()');
     t.end();
 });
+
+
+test('Parse "Something september 14th 4pm"', (t) => {
+    let parsed = parser('Something september 14th 4pm',
+        app.getPatterns(), // get current patterns
+        () => { t.end(); return false; } // default method
+    );
+
+    // check if parsing was successful
+    t.deepEqual(parsed.args, ['Something', 'september', '14th 4pm']);
+    t.equal(parsed.fn, 'remindSoonWithoutSeparator',
+        'should call reminders.remindSoonWithoutSeparator()');
+    t.end();
+});
