@@ -72,8 +72,8 @@ body {
 
     /* mobile first, but expand if the screen is bigger */
     @media screen
-        and (min-width: 800px)
-        and (orientation: landscape) {
+        and (min-width: 1024px)
+        and (orientation: portrait) {
 
         .row {
             display: inline-block;
