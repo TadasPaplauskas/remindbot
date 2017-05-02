@@ -72,7 +72,7 @@ body {
 
     /* mobile first, but expand if the screen is bigger */
     @media screen
-        and (min-width: 1024px)
+        and (min-width: 800px)
         and (orientation: landscape) {
 
         .row {
