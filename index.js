@@ -44,7 +44,7 @@ db.once('open', function()
 
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
-    server.use(express.static('public'));
+    server.use(express.static('docs'));
 
     /*** messenger bot entry point ***/
     server.post('/messenger', function (req, res)
