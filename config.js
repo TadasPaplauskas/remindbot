@@ -4,7 +4,7 @@ config.mongodb = {
     url: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/remindbot'
 };
 config.web = {
-    port: process.env.WEB_PORT || 80
+    port: process.env.PORT || 3000
 };
 
 config.messenger = {
