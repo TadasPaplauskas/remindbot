@@ -49,9 +49,21 @@ db.once('open', function()
     /*** messenger bot entry point ***/
     server.post('/messenger', function (req, res)
     {
-        console.log(JSON.stringify(req.body));
+        // console.log(JSON.stringify(req.body));
         app.messengerRequest(req.body);
         res.sendStatus(200);
+    });
+
+    // verification endpoint
+    server.get('/messenger', function (req, res)
+    {
+        console.log('Verification process');
+        console.log(JSON.stringify(req.query));
+
+        // specify the same token when subscribing for webhooks at facebook
+        if (req.query.hub.verify_token === 'verifyremindbot') {
+            res.send(req.query.hub.challenge);
+        }
     });
 
     server.listen(config.web.port, function ()
