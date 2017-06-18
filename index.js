@@ -61,7 +61,7 @@ db.once('open', function()
         console.log(JSON.stringify(req.query));
 
         // stop right there
-        if (!req.query.hub) {
+        if (!req.query['hub.verify_token']) {
             return res.sendStatus(200);
         }
 
