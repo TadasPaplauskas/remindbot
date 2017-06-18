@@ -60,6 +60,11 @@ db.once('open', function()
         console.log('Verification process');
         console.log(JSON.stringify(req.query));
 
+        // stop right there
+        if (!req.query.hub) {
+            return res.sendStatus(200);
+        }
+
         // specify the same token when subscribing for webhooks at facebook
         if (req.query.hub.verify_token === 'verifyremindbot') {
             res.send(req.query.hub.challenge);
