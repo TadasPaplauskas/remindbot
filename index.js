@@ -66,8 +66,8 @@ db.once('open', function()
         }
 
         // specify the same token when subscribing for webhooks at facebook
-        if (req.query.hub.verify_token === 'verifyremindbot') {
-            res.send(req.query.hub.challenge);
+        if (req.query['hub.verify_token'] === 'verifyremindbot') {
+            res.send(req.query['hub.challenge']);
         }
     });
 
