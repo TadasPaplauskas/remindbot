@@ -57,9 +57,6 @@ db.once('open', function()
     // verification endpoint
     server.get('/messenger', function (req, res)
     {
-        console.log('Verification process');
-        console.log(JSON.stringify(req.query));
-
         // stop right there
         if (!req.query['hub.verify_token']) {
             return res.sendStatus(200);
@@ -76,4 +73,3 @@ db.once('open', function()
         console.log('Listening on port '+ config.web.port +' in '+ process.env.NODE_ENV +' mode');
     });
 });
-
